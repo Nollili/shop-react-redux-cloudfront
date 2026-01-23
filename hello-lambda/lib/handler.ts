@@ -1,6 +1,5 @@
-export async function main() {
+export async function main(event: any) {
   return {
-    body: JSON.stringify({message: 'Hiiiiiiiiiii from Lambda 🎉'}),
-    statusCode: 200,
+    message: `SUCCESS with message ${event.message} 🎉`
   };
 }
