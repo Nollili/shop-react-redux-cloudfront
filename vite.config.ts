@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "./infra/resources/build",
+    outDir: "./dist",
   },
   plugins: [react()],
   test: {
