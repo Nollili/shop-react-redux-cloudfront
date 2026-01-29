@@ -1,12 +1,9 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
 
-const products = [
-  { id: '1', title: 'Classic White T-Shirt', price: 14.99, description: '100% cotton, unisex, available in all sizes' },
-  { id: '2', title: 'Blue Denim Jeans', price: 39.99, description: 'Slim fit, stretchable, various waist sizes' },
-  { id: '3', title: 'Red Hoodie', price: 29.99, description: 'Soft fleece, kangaroo pocket, drawstring hood' },
-  { id: '4', title: 'Black Leather Jacket', price: 89.99, description: 'Genuine leather, biker style, limited edition' },
-  { id: '5', title: 'Green Chino Shorts', price: 24.99, description: 'Lightweight, breathable, perfect for summer' },
-];
+const client = new DynamoDBClient({ region: process.env.AWS_REGION });
+const docClient = DynamoDBDocumentClient.from(client);
 
 export const getProductsAvailable: APIGatewayProxyHandler = async (event) => {
   console.log('Lambda invoked', JSON.stringify(event));
@@ -23,6 +20,28 @@ export const getProductsAvailable: APIGatewayProxyHandler = async (event) => {
   }
 
   try {
+    const productsResult = await docClient.send(new ScanCommand({
+      TableName: process.env.PRODUCTS_TABLE_NAME,
+    }));
+
+    const stockResult = await docClient.send(new ScanCommand({
+      TableName: process.env.STOCK_TABLE_NAME,
+    }));
+
+    const stockMap = new Map();
+    stockResult.Items?.forEach(stock => {
+      stockMap.set(stock.product_id, stock.count);
+    });
+
+    const products = productsResult.Items?.map(product => ({
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      count: stockMap.get(product.id) || 0,
+    })) || [];
+
     return {
       statusCode: 200,
       headers,

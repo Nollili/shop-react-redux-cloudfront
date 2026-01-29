@@ -1,5 +1,9 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import { products } from './products';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+
+const client = new DynamoDBClient({ region: process.env.AWS_REGION });
+const docClient = DynamoDBDocumentClient.from(client);
 
 export const getProductsById: APIGatewayProxyHandler = async (event) => {
   console.log('Lambda invoked', JSON.stringify(event));
@@ -26,15 +30,35 @@ export const getProductsById: APIGatewayProxyHandler = async (event) => {
       };
     }
 
-    const product = products.find(p => p.id === productId);
-    
-    if (!product) {
+    // Get product
+    const productResult = await docClient.send(new GetCommand({
+      TableName: process.env.PRODUCTS_TABLE_NAME,
+      Key: { id: productId },
+    }));
+
+    if (!productResult.Item) {
       return {
         statusCode: 404,
         headers,
         body: JSON.stringify({ message: 'Product not found' }),
       };
     }
+
+    // Get stock
+    const stockResult = await docClient.send(new GetCommand({
+      TableName: process.env.STOCK_TABLE_NAME,
+      Key: { product_id: productId },
+    }));
+
+    // Join product with stock
+    const product = {
+      id: productResult.Item.id,
+      title: productResult.Item.title,
+      description: productResult.Item.description,
+      price: productResult.Item.price,
+      image: productResult.Item.image,
+      count: stockResult.Item?.count || 0,
+    };
 
     return {
       statusCode: 200,

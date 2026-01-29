@@ -1,10 +1,14 @@
-import { OrderStatus } from "~/constants/order";
-import { CartItem } from "~/models/CartItem";
-import { Order } from "~/models/Order";
-import { AvailableProduct, Product } from "~/models/Product";
+#!/usr/bin/env node
 
-export const products: Product[] = [
-    {
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
+const { v4: uuidv4 } = require('uuid');
+
+const client = new DynamoDBClient({ region: 'eu-central-1' });
+const docClient = DynamoDBDocumentClient.from(client);
+
+const products = [
+  {
     id: '19befc55-ea39-4ff0-8b63-e3a3c8b94f53',
     title: 'Classic White T-Shirt',
     description: '100% cotton, unisex, available in all sizes',
@@ -41,65 +45,55 @@ export const products: Product[] = [
   }
 ];
 
-export const availableProducts: AvailableProduct[] = products.map(
-  (product, index) => ({ ...product, count: index + 1 })
-);
+async function populateProducts() {
+  console.log('Populating products table...');
+  
+  for (const product of products) {
+    try {
+      await docClient.send(new PutCommand({
+        TableName: 'products',
+        Item: product
+      }));
+      console.log(`Added product: ${product.title}`);
+    } catch (error) {
+      console.error(`Error adding product ${product.title}:`, error);
+    }
+  }
+}
 
-export const cart: CartItem[] = [
-  {
-    product: {
-      description: "Short Product Description1",
-      id: "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
-      price: 24,
-      title: "ProductOne",
-      image: "",
-    },
-    count: 2,
-  },
-  {
-    product: {
-      description: "Short Product Description7",
-      id: "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
-      price: 15,
-      title: "ProductName",
-      image: "",
-    },
-    count: 5,
-  },
-];
+async function populateStock() {
+  console.log('Populating stock table...');
+  
+  const stockData = [
+    { product_id: products[0].id, count: 50 },
+    { product_id: products[1].id, count: 30 },
+    { product_id: products[2].id, count: 25 },
+    { product_id: products[3].id, count: 10 },
+    { product_id: products[4].id, count: 40 }
+  ];
 
-export const orders: Order[] = [
-  {
-    id: "1",
-    address: {
-      address: "some address",
-      firstName: "Name",
-      lastName: "Surname",
-      comment: "",
-    },
-    items: [
-      { productId: "7567ec4b-b10c-48c5-9345-fc73c48a80aa", count: 2 },
-      { productId: "7567ec4b-b10c-45c5-9345-fc73c48a80a1", count: 5 },
-    ],
-    statusHistory: [
-      { status: OrderStatus.Open, timestamp: Date.now(), comment: "New order" },
-    ],
-  },
-  {
-    id: "2",
-    address: {
-      address: "another address",
-      firstName: "John",
-      lastName: "Doe",
-      comment: "Ship fast!",
-    },
-    items: [{ productId: "7567ec4b-b10c-48c5-9345-fc73c48a80aa", count: 3 }],
-    statusHistory: [
-      {
-        status: OrderStatus.Sent,
-        timestamp: Date.now(),
-        comment: "Fancy order",
-      },
-    ],
-  },
-];
+  for (const stock of stockData) {
+    try {
+      await docClient.send(new PutCommand({
+        TableName: 'stock',
+        Item: stock
+      }));
+      console.log(`Added stock for product: ${stock.product_id}, count: ${stock.count}`);
+    } catch (error) {
+      console.error(`Error adding stock for product ${stock.product_id}:`, error);
+    }
+  }
+}
+
+async function main() {
+  try {
+    await populateProducts();
+    await populateStock();
+    console.log('Database population completed successfully!');
+  } catch (error) {
+    console.error('Error populating database:', error);
+    process.exit(1);
+  }
+}
+
+main();

@@ -25,6 +25,8 @@
 		"serverless:remove": "sls remove"
 	},
 	"dependencies": {
+		"@aws-sdk/client-dynamodb": "^3.975.0",
+		"@aws-sdk/lib-dynamodb": "^3.975.0",
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
 		"@mui/icons-material": "^5.8.4",
@@ -37,6 +39,7 @@
 		"react-dom": "^18.2.0",
 		"react-query": "^3.39.1",
 		"react-router-dom": "^6.3.0",
+		"uuid": "^13.0.0",
 		"yup": "^0.32.11"
 	},
 	"devDependencies": {
