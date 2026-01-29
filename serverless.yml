@@ -116,6 +116,9 @@ resources:
             ViewerProtocolPolicy: redirect-to-https
             Compress: true
             DefaultTTL: 0
+            LambdaFunctionAssociations:
+              - EventType: origin-response
+                LambdaFunctionARN: !GetAtt CSPLambdaVersion.FunctionArn
           ## The certificate to use when viewers use HTTPS to request objects.
           ViewerCertificate:
             CloudFrontDefaultCertificate: true
@@ -124,6 +127,44 @@ resources:
           #   IncludeCookies: 'false'
           #   Bucket: mylogs.s3.amazonaws.com
           #   Prefix: myprefix
+
+    CSPLambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+                  - edgelambda.amazonaws.com
+              Action: sts:AssumeRole
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+    CSPLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        FunctionName: !Sub "${AWS::StackName}-csp-headers"
+        Runtime: nodejs18.x
+        Handler: index.handler
+        Role: !GetAtt CSPLambdaRole.Arn
+        Code:
+          ZipFile: |
+            exports.handler = (event, context, callback) => {
+              const response = event.Records[0].cf.response;
+              response.headers['content-security-policy'] = [{
+                key: 'Content-Security-Policy',
+                value: "default-src 'self'; img-src 'self' https://images.unsplash.com data:;"
+              }];
+              callback(null, response);
+            };
+
+    CSPLambdaVersion:
+      Type: AWS::Lambda::Version
+      Properties:
+        FunctionName: !Ref CSPLambdaFunction
 
   ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
   Outputs:
