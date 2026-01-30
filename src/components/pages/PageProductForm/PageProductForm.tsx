@@ -1,11 +1,13 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Alert from "@mui/material/Alert";
 import { AvailableProduct, AvailableProductSchema } from "~/models/Product";
 import { Formik, Field, FormikProps, Form } from "formik";
 import TextField from "~/components/Form/TextField";
 import { useNavigate, useParams } from "react-router-dom";
 import PaperLayout from "~/components/PaperLayout/PaperLayout";
 import Typography from "@mui/material/Typography";
+import React from "react";
 import {
   useAvailableProduct,
   useInvalidateAvailableProducts,
@@ -43,6 +45,10 @@ export default function PageProductForm() {
   const { data, isLoading } = useAvailableProduct(id); // Load existing product data for editing
   const { mutateAsync: upsertAvailableProduct } = useUpsertAvailableProduct(); // API call to save product
   
+  // State for success message display
+  const [showSuccess, setShowSuccess] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState('');
+  
   // Handle form submission for both create and update operations
   const onSubmit = (values: AvailableProduct) => {
     // Validate and format form values using Yup schema
@@ -59,9 +65,18 @@ export default function PageProductForm() {
     // Submit to API and handle success
     return upsertAvailableProduct(productToSave, {
       onSuccess: () => {
+        // Show success message based on operation type
+        const message = id ? 'Product updated successfully!' : 'Product created successfully!';
+        setSuccessMessage(message);
+        setShowSuccess(true);
+        
         invalidateAvailableProducts(); // Refresh product lists so new/updated product appears
         removeProductCache(id); // Clear cached product data
-        navigate("/admin/products"); // Return to admin products page
+        
+        // Navigate back to admin page after a short delay to show success message
+        setTimeout(() => {
+          navigate("/admin/products");
+        }, 2000); // 2 second delay to show success message
       },
     });
   };
@@ -72,6 +87,14 @@ export default function PageProductForm() {
       <Typography component="h1" variant="h4" align="center" mb={2}>
         {id ? "Edit product" : "Create new product"}
       </Typography>
+      
+      {/* Success message alert - shows after successful product creation/update */}
+      {showSuccess && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          {successMessage}
+        </Alert>
+      )}
+      
       {isLoading ? (
         <>Loading...</> // Show loading state while fetching existing product data
       ) : (
