@@ -45,6 +45,82 @@
     "aws:cdk:path": "ImportServiceStack/ImportBucket/Resource"
    }
   },
+  "ImportBucketNotifications556BF97E": {
+   "Type": "Custom::S3BucketNotifications",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "ImportBucketBAF3A8E9"
+    },
+    "NotificationConfiguration": {
+     "LambdaFunctionConfigurations": [
+      {
+       "Events": [
+        "s3:ObjectCreated:*"
+       ],
+       "Filter": {
+        "Key": {
+         "FilterRules": [
+          {
+           "Name": "suffix",
+           "Value": ".csv"
+          },
+          {
+           "Name": "prefix",
+           "Value": "uploaded/"
+          }
+         ]
+        }
+       },
+       "LambdaFunctionArn": {
+        "Fn::GetAtt": [
+         "ImportFileParserFunction44AF8EB5",
+         "Arn"
+        ]
+       }
+      }
+     ]
+    },
+    "Managed": true,
+    "SkipDestinationValidation": false
+   },
+   "DependsOn": [
+    "ImportBucketAllowBucketNotificationsToImportServiceStackImportFileParserFunction02AE6ACE40B239DE"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportBucket/Notifications/Resource"
+   }
+  },
+  "ImportBucketAllowBucketNotificationsToImportServiceStackImportFileParserFunction02AE6ACE40B239DE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ImportFileParserFunction44AF8EB5",
+      "Arn"
+     ]
+    },
+    "Principal": "s3.amazonaws.com",
+    "SourceAccount": {
+     "Ref": "AWS::AccountId"
+    },
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "ImportBucketBAF3A8E9",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportBucket/AllowBucketNotificationsToImportServiceStackImportFileParserFunction02AE6ACE"
+   }
+  },
   "ImportProductsFileFunctionServiceRole908F92AC": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -132,7 +208,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "4798ad06e59f0c6cca05a306345d0b8eecca44922dde2f13752ed263ca3ca23b.zip"
+     "S3Key": "2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076.zip"
     },
     "Environment": {
      "Variables": {
@@ -157,7 +233,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/ImportProductsFileFunction/Resource",
-    "aws:asset:path": "asset.4798ad06e59f0c6cca05a306345d0b8eecca44922dde2f13752ed263ca3ca23b",
+    "aws:asset:path": "asset.2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -182,6 +258,237 @@
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/ImportProductsFileFunction/LogGroup/Resource"
+   }
+  },
+  "ImportFileParserFunctionServiceRoleAE621202": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportFileParserFunction/ServiceRole/Resource"
+   }
+  },
+  "ImportFileParserFunctionServiceRoleDefaultPolicyA6BC6855": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ImportBucketBAF3A8E9",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ImportBucketBAF3A8E9",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ImportFileParserFunctionServiceRoleDefaultPolicyA6BC6855",
+    "Roles": [
+     {
+      "Ref": "ImportFileParserFunctionServiceRoleAE621202"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportFileParserFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "ImportFileParserFunction44AF8EB5": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "BUCKET_NAME": {
+       "Ref": "ImportBucketBAF3A8E9"
+      }
+     }
+    },
+    "FunctionName": "importFileParser",
+    "Handler": "importFileParser.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "ImportFileParserFunctionServiceRoleAE621202",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "ImportFileParserFunctionServiceRoleDefaultPolicyA6BC6855",
+    "ImportFileParserFunctionServiceRoleAE621202"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportFileParserFunction/Resource",
+    "aws:asset:path": "asset.2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "ImportFileParserFunctionLogGroup1A0E03AA": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "ImportFileParserFunction44AF8EB5"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportFileParserFunction/LogGroup/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:PutBucketNotification",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ImportBucketBAF3A8E9",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+    "Roles": [
+     {
+      "Ref": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Description": "AWS CloudFormation handler for \"Custom::S3BucketNotifications\" resources (@aws-cdk/aws-s3)",
+    "Code": {
+     "ZipFile": "import boto3  # type: ignore\nimport json\nimport logging\nimport urllib.request\n\ns3 = boto3.client(\"s3\")\n\nEVENTBRIDGE_CONFIGURATION = 'EventBridgeConfiguration'\nCONFIGURATION_TYPES = [\"TopicConfigurations\", \"QueueConfigurations\", \"LambdaFunctionConfigurations\"]\n\ndef handler(event: dict, context):\n  response_status = \"SUCCESS\"\n  error_message = \"\"\n  try:\n    props = event[\"ResourceProperties\"]\n    notification_configuration = props[\"NotificationConfiguration\"]\n    managed = props.get('Managed', 'true').lower() == 'true'\n    skipDestinationValidation = props.get('SkipDestinationValidation', 'false').lower() == 'true'\n    stack_id = event['StackId']\n    old = event.get(\"OldResourceProperties\", {}).get(\"NotificationConfiguration\", {})\n    if managed:\n      config = handle_managed(event[\"RequestType\"], notification_configuration)\n    else:\n      config = handle_unmanaged(props[\"BucketName\"], stack_id, event[\"RequestType\"], notification_configuration, old)\n    s3.put_bucket_notification_configuration(Bucket=props[\"BucketName\"], NotificationConfiguration=config, SkipDestinationValidation=skipDestinationValidation)\n  except Exception as e:\n    logging.exception(\"Failed to put bucket notification configuration\")\n    response_status = \"FAILED\"\n    error_message = f\"Error: {str(e)}. \"\n  finally:\n    submit_response(event, context, response_status, error_message)\n\ndef handle_managed(request_type, notification_configuration):\n  if request_type == 'Delete':\n    return {}\n  return notification_configuration\n\ndef handle_unmanaged(bucket, stack_id, request_type, notification_configuration, old):\n  def get_id(n):\n    n['Id'] = ''\n    sorted_notifications = sort_filter_rules(n)\n    strToHash=json.dumps(sorted_notifications, sort_keys=True).replace('\"Name\": \"prefix\"', '\"Name\": \"Prefix\"').replace('\"Name\": \"suffix\"', '\"Name\": \"Suffix\"')\n    return f\"{stack_id}-{hash(strToHash)}\"\n  def with_id(n):\n    n['Id'] = get_id(n)\n    return n\n\n  external_notifications = {}\n  existing_notifications = s3.get_bucket_notification_configuration(Bucket=bucket)\n  for t in CONFIGURATION_TYPES:\n    if request_type == 'Update':\n        old_incoming_ids = [get_id(n) for n in old.get(t, [])]\n        external_notifications[t] = [n for n in existing_notifications.get(t, []) if not get_id(n) in old_incoming_ids]      \n    elif request_type == 'Delete':\n        external_notifications[t] = [n for n in existing_notifications.get(t, []) if not n['Id'].startswith(f\"{stack_id}-\")]\n    elif request_type == 'Create':\n        external_notifications[t] = [n for n in existing_notifications.get(t, [])]\n  if EVENTBRIDGE_CONFIGURATION in existing_notifications:\n    external_notifications[EVENTBRIDGE_CONFIGURATION] = existing_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  if request_type == 'Delete':\n    return external_notifications\n\n  notifications = {}\n  for t in CONFIGURATION_TYPES:\n    external = external_notifications.get(t, [])\n    incoming = [with_id(n) for n in notification_configuration.get(t, [])]\n    notifications[t] = external + incoming\n\n  if EVENTBRIDGE_CONFIGURATION in notification_configuration:\n    notifications[EVENTBRIDGE_CONFIGURATION] = notification_configuration[EVENTBRIDGE_CONFIGURATION]\n  elif EVENTBRIDGE_CONFIGURATION in external_notifications:\n    notifications[EVENTBRIDGE_CONFIGURATION] = external_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  return notifications\n\ndef submit_response(event: dict, context, response_status: str, error_message: str):\n  response_body = json.dumps(\n    {\n      \"Status\": response_status,\n      \"Reason\": f\"{error_message}See the details in CloudWatch Log Stream: {context.log_stream_name}\",\n      \"PhysicalResourceId\": event.get(\"PhysicalResourceId\") or event[\"LogicalResourceId\"],\n      \"StackId\": event[\"StackId\"],\n      \"RequestId\": event[\"RequestId\"],\n      \"LogicalResourceId\": event[\"LogicalResourceId\"],\n      \"NoEcho\": False,\n    }\n  ).encode(\"utf-8\")\n  headers = {\"content-type\": \"\", \"content-length\": str(len(response_body))}\n  try:\n    req = urllib.request.Request(url=event[\"ResponseURL\"], headers=headers, data=response_body, method=\"PUT\")\n    with urllib.request.urlopen(req) as response:\n      print(response.read().decode(\"utf-8\"))\n    print(\"Status code: \" + response.reason)\n  except Exception as e:\n      print(\"send(..) failed executing request.urlopen(..): \" + str(e))\n\ndef sort_filter_rules(json_obj):\n  if not isinstance(json_obj, dict):\n      return json_obj\n  for key, value in json_obj.items():\n      if isinstance(value, dict):\n          json_obj[key] = sort_filter_rules(value)\n      elif isinstance(value, list):\n          json_obj[key] = [sort_filter_rules(item) for item in value]\n  if \"Filter\" in json_obj and \"Key\" in json_obj[\"Filter\"] and \"FilterRules\" in json_obj[\"Filter\"][\"Key\"]:\n      filter_rules = json_obj[\"Filter\"][\"Key\"][\"FilterRules\"]\n      sorted_filter_rules = sorted(filter_rules, key=lambda x: x[\"Name\"])\n      json_obj[\"Filter\"][\"Key\"][\"FilterRules\"] = sorted_filter_rules\n  return json_obj"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.13",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+    "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource"
    }
   },
   "ImportServiceApi8F88CB06": {
@@ -468,7 +775,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1VwXLTMBD9FnzsqIY2t97SUkoGSjxpOGUyHUXaOGoUyUhyS/D431lJluPSMAzDwImLLe+udt8+vZXP8/PRKH/zij7ZU8a3p1Ks8ubOUbYlaLpv7ChvLmu2BbdoslVYfKI7yC6yk4xkVb2Sgs2A8jFjYG12sabSAslWUrNtEbzJEzYwbXCJqaiU+gn4LbiN5t6U3VzPMaD4HJ7Tu3m2JClqakQpVMrRGd9jVTDJuKNfx2WE1S5bggU4v8Jis1rCXy9IguUkW7ZLcrVWkS8SX5fUwgIRSbpbcZo372rFnNAKIa275YBQUysn+q8NVVyC6bnjyQHqURitdqBchyA0fD00L56DSnX9ugCzE9biV0sE3eXNTEtYhBRzXRihmKioLDSe3t6T1zHqUBabiZJCQe8LBX7p/HnegM2XJ9EcUKd0c+09L6q8NHOOknXgG7cDwEfMoV4s1RI7uqfWgrP52L+I1KXNm4+6vDG6rpAQ2S37E4r7U0RLaCVKrPBE90giWDeuBG4zcTU4Vw6WGVH5A+gta1pL5zVaGFhLUW7cNAQg1E6uR2TY6/dgGuqy7QiNAMhbqKTe+/4R1UsMiD7pDhwV6hBuh7Kaa2xYMCon/Bm5f24PYA9VCR5XCQFqMg1YD06CrenaMAhz5QVAIiWR9uBK0+NcFX2dQSgHpaEDAvSA8Bojjfjmx234NUm7kynsn++rfvaRxQ+wn8GXWhjg/RV4PB4vjgAJ26iwMsTb0KJMa3t1GHDTuQtqUESuP95l23F5+yzL7yYh/8n6d2QZbBbn8cfEUdQxTa9qRFZRk3SPP1jqNrhxOAYpFJvrd4U5CHeYHxKhSh84rV1Vu5YobDJ/sK8fz0f52Rn+6x+sEKfdnyafxfd3+++nGggIAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1WS1PbMBD+LfWREW4hN27hUcq0NJmQnjIZRrE2jogiuXpAU4//e1eS5RjCMO0UeurFlr9d7ePb1crH+fFgkH94Rx/MYcHWh4Iv8vrG0mJNELqtzSCvT12xBjurs0VYfKUbyE6yg4xklVsIXkyAsmFRgDHZyZIKAyRbCFWsx0GaJGFDoTQu0RQVQj0Auwa7UsxD2eXFFBXG38JzdDPN5iRpjTQvuUw2WvATegWdwA39MSxjWM28IeiAsTN0NnEC3twhCchBNm/m5GwpI18kvk6pgRlGJOhmwWheo3wMesON4UqSj04WFhcY4LJd9ujVTlrefa2oZAJ0xyRLApD3XCu5AWnbeEL6F3141oVIXtMVyfwu5X7HceAmJdwQTjd5PVECZmHTVI01lwWvqBgrbJutr1pbSov9uLqSgkvoZCmXl4Uv230rr8a4DbBTxOqsSvbxHCjX0RZ1fPrDwEfk782iCtx7byTioSppw1R5yZ6dfZgxnAwWfGHNIxr34Vez/1qGAgMx+YaYwS0WAKzJh/5FhCpNXn9R5aVWrsKGFO2yOyHe7D4YjKZtDaEVL9HtA91iZ4Oxw4qjLR1XvcPGwBSaV13dPbKkTlg/scYaloKXKzsKCsY3UZhAzwylbprtoP6Uatq6xwDIOVRCbT0pGNV+DBh9GgZgKZc7ddM/3VOFCfOCiiv25Cj9LR6C3XklWMMSQqgJ6rEehARTU04XEKasLz+JlETagyiNNGurKGsBLi2UmvYIUD3CHWpq/tPPwP7XVdqdoLB/uq26mwBZ/AzbCXx3XAPrLsTn9fEaCSFhGhV6hng3GuxdZ852U1e34jHV2ES2K+88DYzrR1b+1Aj5T9a/I0tjsngenxqOTR3NdF2NkVVU7+7aitoVbuwfg6SKyfW+dhba2zfcwCQMO39wuCy9+sjZytmGSEw8vzPv748H+dER/g3eGc4P21+CfBLfvwClRmtWKgoAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/CDKMetadata/Default"

@@ -638,16 +638,17 @@
   "ProductServiceApiFE734E24": {
    "Type": "AWS::ApiGateway::RestApi",
    "Properties": {
+    "Description": "REST API for product management operations",
     "Name": "Product Service"
    },
    "Metadata": {
     "aws:cdk:path": "ProductServiceStack/ProductServiceApi/Resource"
    }
   },
-  "ProductServiceApiDeployment696F4D07eb4d8ab5df1a2b0e239ef41bf2e9823d": {
+  "ProductServiceApiDeployment696F4D07b3fdf3160a8fb6e743176cc341dc2017": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
-    "Description": "Automatically created by the RestApi construct",
+    "Description": "REST API for product management operations",
     "RestApiId": {
      "Ref": "ProductServiceApiFE734E24"
     }
@@ -676,7 +677,7 @@
    "Type": "AWS::ApiGateway::Stage",
    "Properties": {
     "DeploymentId": {
-     "Ref": "ProductServiceApiDeployment696F4D07eb4d8ab5df1a2b0e239ef41bf2e9823d"
+     "Ref": "ProductServiceApiDeployment696F4D07b3fdf3160a8fb6e743176cc341dc2017"
     },
     "RestApiId": {
      "Ref": "ProductServiceApiFE734E24"
@@ -1482,7 +1483,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1Y30/bMBD+W8gjMh7Qt70B+4U2RsX6VlXIja/pgWNntgPqovzvOztxW8bYNEE1HvJQ1fedz3e+++yzcsyPRyN+uCfu3UEubw8UznnzzYv8lhF03ciVFqWRcz4RcwWnwsF0xpQo51Lw5kOtc49GT5vM1tpjCdnbbD9j2VJoqcD2Um5kUoC+Q2t0CdpHpGVNJqR8vw1P48z9bPZX5eB0d05n7GyhU4HDeAy2ROdIahmKkjdXRsE0LjExY4s6x0qosVGYr2ihpu0ceOLS8lwr1LDWrb3/Ufl/1t2ddoj4uTFFTgbasQ6ObE2hTEzQPIrwMSwl3W8eAuFdcvtiC70IPETzJBwp0FW/ZW50LZwD7/hJ+COZn9b5LfjUp0zhePPFFB+tqSu6q1Q//Cr6uzS4eQ4Yw0kOWiYqLCjge7Gi6xGcP6kw9MZutLZimYSFqJU/M9aNLSwUFkt/WYWblvZJG1fK3F9aLDDI0SJCF+CXRj6APoGQYDuo7Q9I5469g0qZVUgexSDB5Raji2ReYT+y4AXqzXS33TsmhraHuVDn8pczOuC/x2MRNtlkxOECYgkStMWdqGRUMlPbvHtfhTPEulJ35Imq1Pq9rzpdD6D2UFixVVizRaSaZlr8Ed4K29J5sk5QtJ+sqsT1wI7PsLqC7zVaoNkLoRw8NZ9lZQyJtlGRZ4iHNXN0dmt3tnmd2F49FpaOgl/Tdtb2ubx4sMq/LsKGZA3JeoXJ6u/SId0DN19dsp7PzZdZIfbCzmDdDCkPlbCpXTIS/JL2n8RdvaHY4Hb3btNDNRaaoljXvP/+kH4zFl/24ZWEughGl7Wvat8yTYeD37g3d8cjfnTED/duHOJB/52EX3X/PwE3to4r3hIAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1YTW/bMAz9LfWxULU2ue3Wdl/B1iXocguCQrEYR60seZLcIjP830fJlpMu64YhCdaDD0HER0mkyEeJ8IAOhkN6fsKe7FnKH86kWNDqm2PpA0HoruJrxXLNF3TKFhKumIXZnEiWLzij1YdSpU5oNasSUyonckjeJqcJSVZMcQmmlVLNowLUozBa5aBcQGpSJYzz99vwLMw8TeZ/VfZGj2d0Tq6XKibYjydgcmEtSjURLKfVrZYwC1tM9cQIlYqCyYmWIl3jRlXdGHDIpdVISaGg03XW/6j8P/seT9t7vK9PgZOedqSBA1ujK1PtNTse7sKc4/3mwBPeRrMH2+ggcO/Ni3CgQJP9mtjhHbMWnKWX/g9lelWmD+DiO6UzS6svOvtodFngXSXb4VfW3qXezD5gcCcaqAkrRIYOP7E1Xo9g3WUh/NvYjLpVJOFgUyMKf7V2yJKV0l1rYycGllJkKzcOE/DkGAop9dPYiEx4OawI0A24lebPoE/AOJgGqtuSaRwg76CQeu3DiV7t+oDetyMDjgm1mW63X5OpxgOLlMkR/6Vqe/z3eEjCJpoEWZ1BSEGEttgUlARTpkuTNh2XryrSpLqhU1DFZsC5otG1gFAOMsO2Equ3iFTiTCN++O5hWxrF1REK66frIrLfs+MzrG/heykM4OwlkxZemk+SPLiExyjQMoTyTSxWc2mvN/2KadUTZrA4XEfbed3G8ubZLv+6CemD1QfrFQarvUv7cPfcfHXB2p+bh9khvIXNgu4xxDgUzMTnkqDgVnj+KB6rhyK92eObjY1qSDR60eW8/SIRf3MSen3fJQmV+UXj0hWlq4nC4qD39s3jYEgvLuj5yb0V4qz9ckJvm/+fCyMYAPASAAA="
    },
    "Metadata": {
     "aws:cdk:path": "ProductServiceStack/CDKMetadata/Default"

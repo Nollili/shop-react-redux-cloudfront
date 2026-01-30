@@ -61,11 +61,13 @@
  },
  "Outputs": {
   "ProductsTableName": {
+   "Description": "Name of the products DynamoDB table",
    "Value": {
     "Ref": "ProductsTable241ADBFF"
    }
   },
   "StockTableName": {
+   "Description": "Name of the stock DynamoDB table",
    "Value": {
     "Ref": "StockTable7710DF9D"
    }
