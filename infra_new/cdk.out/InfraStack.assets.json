@@ -1,0 +1,20 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "0281329b899c38cc494c7bcaa5d0fca8045b9bbca26d14ec1d11f499d333d2fd": {
+      "displayName": "InfraStack Template",
+      "source": {
+        "path": "InfraStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-038a11f0": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "0281329b899c38cc494c7bcaa5d0fca8045b9bbca26d14ec1d11f499d333d2fd.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

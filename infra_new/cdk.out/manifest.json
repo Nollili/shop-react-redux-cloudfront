@@ -1,0 +1,3048 @@
+{
+  "version": "48.0.0",
+  "artifacts": {
+    "DeployWebAppStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "DeployWebAppStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "DeployWebAppStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "DeployWebAppStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d7ba51f0d9bff0875956c4eeccf182d95c0cc831ea5bfa6f1ded568718ea1a7b.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "DeployWebAppStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "DeployWebAppStack.assets"
+      ],
+      "metadata": {
+        "/DeployWebAppStack/deployment/FrontendBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "blockPublicAccess": "*",
+              "removalPolicy": "destroy"
+            }
+          }
+        ],
+        "/DeployWebAppStack/deployment/FrontendBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentFrontendBucket67CEB713"
+          }
+        ],
+        "/DeployWebAppStack/deployment/FrontendBucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
+        "/DeployWebAppStack/deployment/FrontendBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentFrontendBucketPolicyF959E265"
+          }
+        ],
+        "/DeployWebAppStack/deployment/CloudfrontDistribution": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "defaultBehavior": {
+                "origin": "*",
+                "viewerProtocolPolicy": "redirect-to-https"
+              },
+              "defaultRootObject": "*",
+              "errorResponses": [
+                {
+                  "httpStatus": "*",
+                  "responseHttpStatus": "*",
+                  "responsePagePath": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/DeployWebAppStack/deployment/CloudfrontDistribution/Origin1/S3OriginAccessControl": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/DeployWebAppStack/deployment/CloudfrontDistribution/Origin1/S3OriginAccessControl/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentCloudfrontDistributionOrigin1S3OriginAccessControl5D9F588E"
+          }
+        ],
+        "/DeployWebAppStack/deployment/CloudfrontDistribution/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentCloudfrontDistributionDDB77E0D"
+          }
+        ],
+        "/DeployWebAppStack/deployment/BucketDeployment/AwsCliLayer": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {}
+          }
+        ],
+        "/DeployWebAppStack/deployment/BucketDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentBucketDeploymentAwsCliLayerA85B3C9A"
+          }
+        ],
+        "/DeployWebAppStack/deployment/BucketDeployment/CustomResourceHandler": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "uuid": "*",
+              "layers": [
+                "*"
+              ],
+              "environment": "*",
+              "lambdaPurpose": "*",
+              "timeout": "*",
+              "role": "*",
+              "memorySize": "*",
+              "ephemeralStorageSize": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "filesystem": "*",
+              "logGroup": "*",
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMetadata": [
+                "*",
+                true
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMetadata": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/DeployWebAppStack/deployment/BucketDeployment/CustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/DeployWebAppStack/deployment/BucketDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentBucketDeploymentCustomResourceF86F2BCD"
+          }
+        ],
+        "/DeployWebAppStack/deployment/CloudFrontURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentCloudFrontURL05BF422F"
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "layers": [
+                "*"
+              ],
+              "environment": "*",
+              "timeout": "*",
+              "role": "*",
+              "memorySize": "*",
+              "ephemeralStorageSize": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "filesystem": "*",
+              "logGroup": "*",
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addLayers": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "BucketDeploymentSingletonFunction.ensureLambda (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/singleton-lambda.js:1:7815)",
+              "new SingletonFunction2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/singleton-lambda.js:1:5778)",
+              "new SingletonFunction2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new BucketDeploymentSingletonFunction (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/custom-resource-handlers/dist/aws-s3-deployment/bucket-deployment-provider.generated.js:1:284)",
+              "new BucketDeployment2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-s3-deployment/lib/bucket-deployment.js:1:5567)",
+              "new BucketDeployment2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new DeploymentService (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/deployment-service/index.ts:43:5)",
+              "new DeployWebAppStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/deploy-web-app-stack/deploy-web-app-stack.ts:9:5)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:12:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/DeployWebAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CLogGroup817B64E9"
+          }
+        ],
+        "/DeployWebAppStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/DeployWebAppStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/DeployWebAppStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/DeployWebAppStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "DeployWebAppStack"
+    },
+    "HelloS3Stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "HelloS3Stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "HelloS3Stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "HelloS3Stack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4bf990d6b2d430a6bd7f2ceb415a78d09c54a4ac3555a565c839841357fe9bb3.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "HelloS3Stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "HelloS3Stack.assets"
+      ],
+      "metadata": {
+        "/HelloS3Stack/MyFirstBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "versioned": true,
+              "removalPolicy": "destroy"
+            }
+          }
+        ],
+        "/HelloS3Stack/MyFirstBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyFirstBucketB8884501"
+          }
+        ],
+        "/HelloS3Stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/HelloS3Stack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/HelloS3Stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/HelloS3Stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "HelloS3Stack"
+    },
+    "ProductServiceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ProductServiceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ProductServiceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "ProductServiceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e54f9cf79b2fbc01a964f3829ec9dded0f19bb5acc7eb1f7d81bdcdbae67fab3.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ProductServiceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ProductServiceStack.assets"
+      ],
+      "metadata": {
+        "/ProductServiceStack/CreateProductLambda": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:15:33)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:29:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductLambdaServiceRoleDDA15AE7"
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductLambdaServiceRoleDefaultPolicyE1185464"
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductLambda6A261B7D"
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductLambda/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductLambdaLogGroupBFB1E32A"
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:25:35)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:29:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsListLambdaServiceRole07D1CCC1"
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsListLambdaServiceRoleDefaultPolicyC05B33EA"
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsListLambdaC5169546"
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsListLambda/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsListLambdaLogGroup4523949D"
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:35:40)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:29:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsAvailableLambdaServiceRoleBA0BBF6E"
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsAvailableLambdaServiceRoleDefaultPolicy8B22D38F"
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsAvailableLambda516AB944"
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsAvailableLambda/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsAvailableLambdaLogGroup2E783BF9"
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:45:35)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:29:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsByIdLambdaServiceRole117F57FF"
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsByIdLambdaServiceRoleDefaultPolicy48ABB5EA"
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsByIdLambda529BE5F6"
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/GetProductsByIdLambda/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetProductsByIdLambdaLogGroup504EEE03"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "restApiName": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiFE734E24"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Deployment": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "description": "*",
+              "api": "*",
+              "retainDeployments": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiDeployment696F4D07eb4d8ab5df1a2b0e239ef41bf2e9823d"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/DeploymentStage.prod": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "deployment": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiDeploymentStageprod7C4CB6D5"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiEndpointE57F6293"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiOPTIONS674030A1"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductBBDC9A50"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductOPTIONSABDE0F7B"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductavailable1E97B22A"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductavailableOPTIONSDA8201E1"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/GET": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/GET/ApiPermission.ProductServiceStackProductServiceApiF6E5F4DA.GET..product.available": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductavailableGETApiPermissionProductServiceStackProductServiceApiF6E5F4DAGETproductavailable6978BBC8"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/GET/ApiPermission.Test.ProductServiceStackProductServiceApiF6E5F4DA.GET..product.available": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductavailableGETApiPermissionTestProductServiceStackProductServiceApiF6E5F4DAGETproductavailableF5D74A66"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/product/available/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductavailableGETF25C865A"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproducts612C39F6"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsOPTIONS099B9D02"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsproductId622E148C"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsproductIdOPTIONS5E5266B3"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/GET": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/GET/ApiPermission.ProductServiceStackProductServiceApiF6E5F4DA.GET..products.{productId}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsproductIdGETApiPermissionProductServiceStackProductServiceApiF6E5F4DAGETproductsproductId865B954C"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/GET/ApiPermission.Test.ProductServiceStackProductServiceApiF6E5F4DA.GET..products.{productId}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsproductIdGETApiPermissionTestProductServiceStackProductServiceApiF6E5F4DAGETproductsproductId921695B0"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/{productId}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsproductIdGET139D5998"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/GET": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/GET/ApiPermission.ProductServiceStackProductServiceApiF6E5F4DA.GET..products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsGETApiPermissionProductServiceStackProductServiceApiF6E5F4DAGETproducts2CAD3151"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/GET/ApiPermission.Test.ProductServiceStackProductServiceApiF6E5F4DA.GET..products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsGETApiPermissionTestProductServiceStackProductServiceApiF6E5F4DAGETproducts60CF323A"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsGET2C58D7CE"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/POST": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/POST/ApiPermission.ProductServiceStackProductServiceApiF6E5F4DA.POST..products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsPOSTApiPermissionProductServiceStackProductServiceApiF6E5F4DAPOSTproductsAE71D17D"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/POST/ApiPermission.Test.ProductServiceStackProductServiceApiF6E5F4DA.POST..products": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsPOSTApiPermissionTestProductServiceStackProductServiceApiF6E5F4DAPOSTproducts7CEC4AB5"
+          }
+        ],
+        "/ProductServiceStack/ProductServiceApi/Default/products/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductServiceApiproductsPOST9CA2279A"
+          }
+        ],
+        "/ProductServiceStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ProductServiceStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ProductServiceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ProductServiceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ProductServiceStack"
+    },
+    "DatabaseStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "DatabaseStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "DatabaseStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "DatabaseStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2000202bc44177a6b75e49f22d2472428fd1c90f5451ac306738c1914145b212.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "DatabaseStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "DatabaseStack.assets"
+      ],
+      "metadata": {
+        "/DatabaseStack/ProductsTable": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "tableName": "*",
+              "partitionKey": {
+                "name": "*",
+                "type": "S"
+              },
+              "billingMode": "PAY_PER_REQUEST",
+              "removalPolicy": "destroy"
+            }
+          },
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ProductsTable241ADBFF"
+            }
+          }
+        ],
+        "/DatabaseStack/ProductsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductsTable241ADBFF"
+          }
+        ],
+        "/DatabaseStack/ProductsTable/ScalingRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/DatabaseStack/StockTable": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "tableName": "*",
+              "partitionKey": {
+                "name": "*",
+                "type": "S"
+              },
+              "billingMode": "PAY_PER_REQUEST",
+              "removalPolicy": "destroy"
+            }
+          },
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "StockTable7710DF9D"
+            }
+          }
+        ],
+        "/DatabaseStack/StockTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StockTable7710DF9D"
+          }
+        ],
+        "/DatabaseStack/StockTable/ScalingRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/DatabaseStack/ProductsTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProductsTableName"
+          }
+        ],
+        "/DatabaseStack/StockTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StockTableName"
+          }
+        ],
+        "/DatabaseStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/DatabaseStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/DatabaseStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/DatabaseStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "DatabaseStack"
+    },
+    "ImportServiceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ImportServiceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ImportServiceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "ImportServiceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ede6401716b1489f98e7d7fb64241475929b2d78f7ea78452fb52f085d004af4.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ImportServiceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ImportServiceStack.assets"
+      ],
+      "metadata": {
+        "/ImportServiceStack/ImportBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucketName": "*",
+              "publicReadAccess": false,
+              "blockPublicAccess": "*",
+              "cors": [
+                {
+                  "allowedMethods": [
+                    "GET",
+                    "PUT",
+                    "POST"
+                  ],
+                  "allowedOrigins": "*",
+                  "allowedHeaders": "*",
+                  "maxAge": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addCorsRule": [
+                {
+                  "allowedMethods": [
+                    "GET",
+                    "PUT",
+                    "POST"
+                  ],
+                  "allowedOrigins": "*",
+                  "allowedHeaders": "*",
+                  "maxAge": "*"
+                },
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportBucketBAF3A8E9"
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "functionName": "*",
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:30:40)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:32:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportProductsFileFunctionServiceRole908F92AC"
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportProductsFileFunctionServiceRoleDefaultPolicyF4DDFD49"
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportProductsFileFunction41430F60"
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportProductsFileFunction/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportProductsFileFunctionLogGroup67591ED7"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "restApiName": "*",
+              "description": "*",
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApi8F88CB06"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Deployment": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "description": "*",
+              "api": "*",
+              "retainDeployments": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiDeployment3C31EF8Cfef226bfeaeb59909c801cfcc723abb8"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/DeploymentStage.prod": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "deployment": "*"
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiDeploymentStageprod6E938E1D"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiEndpoint08D58EAA"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiOPTIONS006BA8D8"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*"
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiimport7D50D4D2"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiimportOPTIONS0D107BC8"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/GET": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "requestParameters": "*"
+              }
+            }
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/GET/ApiPermission.ImportServiceStackImportServiceApiAA3B25C9.GET..import": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiimportGETApiPermissionImportServiceStackImportServiceApiAA3B25C9GETimport058599A4"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/GET/ApiPermission.Test.ImportServiceStackImportServiceApiAA3B25C9.GET..import": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiimportGETApiPermissionTestImportServiceStackImportServiceApiAA3B25C9GETimport0ABB6BE5"
+          }
+        ],
+        "/ImportServiceStack/ImportServiceApi/Default/import/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportServiceApiimportGET6BDAA231"
+          }
+        ],
+        "/ImportServiceStack/ImportApiUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportApiUrl"
+          }
+        ],
+        "/ImportServiceStack/ImportBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImportBucketName"
+          }
+        ],
+        "/ImportServiceStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ImportServiceStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ImportServiceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ImportServiceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ImportServiceStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "aws-cdk-lib/feature-flag-report": {
+      "type": "cdk:feature-flag-report",
+      "properties": {
+        "module": "aws-cdk-lib",
+        "flags": {
+          "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Pass signingProfileName to CfnSigningProfile"
+          },
+          "@aws-cdk/core:newStyleStackSynthesis": {
+            "recommendedValue": true,
+            "explanation": "Switch to new stack synthesis method which enables CI/CD",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/core:stackRelativeExports": {
+            "recommendedValue": true,
+            "explanation": "Name exports based on the construct paths relative to the stack, rather than the global construct path",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Disable implicit openListener when custom security groups are provided"
+          },
+          "@aws-cdk/aws-rds:lowercaseDbIdentifier": {
+            "recommendedValue": true,
+            "explanation": "Force lowercasing of RDS Cluster names in CDK",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": {
+            "recommendedValue": true,
+            "explanation": "Allow adding/removing multiple UsagePlanKeys independently",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-lambda:recognizeVersionProps": {
+            "recommendedValue": true,
+            "explanation": "Enable this feature flag to opt in to the updated logical id calculation for Lambda Version created using the  `fn.currentVersion`.",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-lambda:recognizeLayerVersion": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable this feature flag to opt in to the updated logical id calculation for Lambda Version created using the `fn.currentVersion`."
+          },
+          "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": {
+            "recommendedValue": true,
+            "explanation": "Enable this feature flag to have cloudfront distributions use the security policy TLSv1.2_2021 by default.",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/core:checkSecretUsage": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable this flag to make it impossible to accidentally use SecretValues in unsafe locations"
+          },
+          "@aws-cdk/core:target-partitions": {
+            "userValue": [
+              "aws",
+              "aws-cn"
+            ],
+            "recommendedValue": [
+              "aws",
+              "aws-cn"
+            ],
+            "explanation": "What regions to include in lookup tables of environment agnostic stacks"
+          },
+          "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "ECS extensions will automatically add an `awslogs` driver if no logging is specified"
+          },
+          "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable this feature flag to have Launch Templates generated by the `InstanceRequireImdsv2Aspect` use unique names."
+          },
+          "@aws-cdk/aws-ecs:arnFormatIncludesClusterName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "ARN format used by ECS. In the new ARN format, the cluster name is part of the resource ID."
+          },
+          "@aws-cdk/aws-iam:minimizePolicies": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Minimize IAM policies by combining Statements"
+          },
+          "@aws-cdk/core:validateSnapshotRemovalPolicy": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Error on snapshot removal policies on resources that do not support it."
+          },
+          "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Generate key aliases that include the stack name"
+          },
+          "@aws-cdk/aws-s3:createDefaultLoggingPolicy": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable this feature flag to create an S3 bucket policy by default in cases where an AWS service would automatically create the Policy if one does not exist."
+          },
+          "@aws-cdk/aws-sns-subscriptions:restrictSqsDescryption": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Restrict KMS key policy for encrypted Queues a bit more"
+          },
+          "@aws-cdk/aws-apigateway:disableCloudWatchRole": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Make default CloudWatch Role behavior safe for multiple API Gateways in one environment"
+          },
+          "@aws-cdk/core:enablePartitionLiterals": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Make ARNs concrete if AWS partition is known"
+          },
+          "@aws-cdk/aws-events:eventsTargetQueueSameAccount": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Event Rules may only push to encrypted SQS queues in the same account"
+          },
+          "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Avoid setting the \"ECS\" deployment controller when adding a circuit breaker"
+          },
+          "@aws-cdk/aws-iam:importedRoleStackSafeDefaultPolicyName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable this feature to create default policy names for imported roles that depend on the stack the role is in."
+          },
+          "@aws-cdk/aws-s3:serverAccessLogsUseBucketPolicy": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Use S3 Bucket Policy instead of ACLs for Server Access Logging"
+          },
+          "@aws-cdk/aws-route53-patters:useCertificate": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Use the official `Certificate` resource instead of `DnsValidatedCertificate`"
+          },
+          "@aws-cdk/customresources:installLatestAwsSdkDefault": {
+            "userValue": false,
+            "recommendedValue": false,
+            "explanation": "Whether to install the latest SDK by default in AwsCustomResource"
+          },
+          "@aws-cdk/aws-rds:databaseProxyUniqueResourceName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Use unique resource name for Database Proxy"
+          },
+          "@aws-cdk/aws-codedeploy:removeAlarmsFromDeploymentGroup": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Remove CloudWatch alarms from deployment group"
+          },
+          "@aws-cdk/aws-apigateway:authorizerChangeDeploymentLogicalId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Include authorizer configuration in the calculation of the API deployment logical ID."
+          },
+          "@aws-cdk/aws-ec2:launchTemplateDefaultUserData": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Define user data for a launch template by default when a machine image is provided."
+          },
+          "@aws-cdk/aws-secretsmanager:useAttachedSecretResourcePolicyForSecretTargetAttachments": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "SecretTargetAttachments uses the ResourcePolicy of the attached Secret."
+          },
+          "@aws-cdk/aws-redshift:columnId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Whether to use an ID to track Redshift column changes"
+          },
+          "@aws-cdk/aws-stepfunctions-tasks:enableEmrServicePolicyV2": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable AmazonEMRServicePolicy_v2 managed policies"
+          },
+          "@aws-cdk/aws-ec2:restrictDefaultSecurityGroup": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Restrict access to the VPC default security group"
+          },
+          "@aws-cdk/aws-apigateway:requestValidatorUniqueId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Generate a unique id for each RequestValidator added to a method"
+          },
+          "@aws-cdk/aws-kms:aliasNameRef": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "KMS Alias name and keyArn will have implicit reference to KMS Key"
+          },
+          "@aws-cdk/aws-kms:applyImportedAliasPermissionsToPrincipal": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enable grant methods on Aliases imported by name to use kms:ResourceAliases condition"
+          },
+          "@aws-cdk/aws-autoscaling:generateLaunchTemplateInsteadOfLaunchConfig": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Generate a launch template when creating an AutoScalingGroup"
+          },
+          "@aws-cdk/core:includePrefixInUniqueNameGeneration": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Include the stack prefix in the stack name generation process"
+          },
+          "@aws-cdk/aws-efs:denyAnonymousAccess": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "EFS denies anonymous clients accesses"
+          },
+          "@aws-cdk/aws-opensearchservice:enableOpensearchMultiAzWithStandby": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enables support for Multi-AZ with Standby deployment for opensearch domains"
+          },
+          "@aws-cdk/aws-lambda-nodejs:useLatestRuntimeVersion": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enables aws-lambda-nodejs.Function to use the latest available NodeJs runtime as the default"
+          },
+          "@aws-cdk/aws-efs:mountTargetOrderInsensitiveLogicalId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, mount targets will have a stable logicalId that is linked to the associated subnet."
+          },
+          "@aws-cdk/aws-rds:auroraClusterChangeScopeOfInstanceParameterGroupWithEachParameters": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, a scope of InstanceParameterGroup for AuroraClusterInstance with each parameters will change."
+          },
+          "@aws-cdk/aws-appsync:useArnForSourceApiAssociationIdentifier": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, will always use the arn for identifiers for CfnSourceApiAssociation in the GraphqlApi construct rather than id."
+          },
+          "@aws-cdk/aws-rds:preventRenderingDeprecatedCredentials": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, creating an RDS database cluster from a snapshot will only render credentials for snapshot credentials."
+          },
+          "@aws-cdk/aws-codepipeline-actions:useNewDefaultBranchForCodeCommitSource": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the CodeCommit source action is using the default branch name 'main'."
+          },
+          "@aws-cdk/aws-cloudwatch-actions:changeLambdaPermissionLogicalIdForLambdaAction": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the logical ID of a Lambda permission for a Lambda action includes an alarm ID."
+          },
+          "@aws-cdk/aws-codepipeline:crossAccountKeysDefaultValueToFalse": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enables Pipeline to set the default value for crossAccountKeys to false."
+          },
+          "@aws-cdk/aws-codepipeline:defaultPipelineTypeToV2": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Enables Pipeline to set the default pipeline type to V2."
+          },
+          "@aws-cdk/aws-kms:reduceCrossAccountRegionPolicyScope": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, IAM Policy created from KMS key grant will reduce the resource scope to this key only."
+          },
+          "@aws-cdk/pipelines:reduceAssetRoleTrustScope": {
+            "recommendedValue": true,
+            "explanation": "Remove the root account principal from PipelineAssetsFileRole trust policy",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-eks:nodegroupNameAttribute": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, nodegroupName attribute of the provisioned EKS NodeGroup will not have the cluster name prefix."
+          },
+          "@aws-cdk/aws-ec2:ebsDefaultGp3Volume": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the default volume type of the EBS volume will be GP3"
+          },
+          "@aws-cdk/aws-ecs:removeDefaultDeploymentAlarm": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, remove default deployment alarm settings"
+          },
+          "@aws-cdk/custom-resources:logApiResponseDataPropertyTrueDefault": {
+            "userValue": false,
+            "recommendedValue": false,
+            "explanation": "When enabled, the custom resource used for `AwsCustomResource` will configure the `logApiResponseData` property as true by default"
+          },
+          "@aws-cdk/aws-s3:keepNotificationInImportedBucket": {
+            "userValue": false,
+            "recommendedValue": false,
+            "explanation": "When enabled, Adding notifications to a bucket in the current stack will not remove notification from imported stack."
+          },
+          "@aws-cdk/aws-stepfunctions-tasks:useNewS3UriParametersForBedrockInvokeModelTask": {
+            "recommendedValue": true,
+            "explanation": "When enabled, use new props for S3 URI field in task definition of state machine for bedrock invoke model.",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/core:explicitStackTags": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, stack tags need to be assigned explicitly on a Stack."
+          },
+          "@aws-cdk/aws-ecs:reduceEc2FargateCloudWatchPermissions": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, we will only grant the necessary permissions when users specify cloudwatch log group through logConfiguration"
+          },
+          "@aws-cdk/aws-dynamodb:resourcePolicyPerReplica": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled will allow you to specify a resource policy per replica, and not copy the source table policy to all replicas"
+          },
+          "@aws-cdk/aws-ec2:ec2SumTImeoutEnabled": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, initOptions.timeout and resourceSignalTimeout values will be summed together."
+          },
+          "@aws-cdk/aws-appsync:appSyncGraphQLAPIScopeLambdaPermission": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, a Lambda authorizer Permission created when using GraphqlApi will be properly scoped with a SourceArn."
+          },
+          "@aws-cdk/aws-rds:setCorrectValueForDatabaseInstanceReadReplicaInstanceResourceId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the value of property `instanceResourceId` in construct `DatabaseInstanceReadReplica` will be set to the correct value which is `DbiResourceId` instead of currently `DbInstanceArn`"
+          },
+          "@aws-cdk/core:cfnIncludeRejectComplexResourceUpdateCreatePolicyIntrinsics": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, CFN templates added with `cfn-include` will error if the template contains Resource Update or Create policies with CFN Intrinsics that include non-primitive values."
+          },
+          "@aws-cdk/aws-lambda-nodejs:sdkV3ExcludeSmithyPackages": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, both `@aws-sdk` and `@smithy` packages will be excluded from the Lambda Node.js 18.x runtime to prevent version mismatches in bundled applications."
+          },
+          "@aws-cdk/aws-stepfunctions-tasks:fixRunEcsTaskPolicy": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the resource of IAM Run Ecs policy generated by SFN EcsRunTask will reference the definition, instead of constructing ARN."
+          },
+          "@aws-cdk/aws-ec2:bastionHostUseAmazonLinux2023ByDefault": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the BastionHost construct will use the latest Amazon Linux 2023 AMI, instead of Amazon Linux 2."
+          },
+          "@aws-cdk/core:aspectStabilization": {
+            "recommendedValue": true,
+            "explanation": "When enabled, a stabilization loop will be run when invoking Aspects during synthesis.",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-route53-targets:userPoolDomainNameMethodWithoutCustomResource": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, use a new method for DNS Name of user pool domain target without creating a custom resource."
+          },
+          "@aws-cdk/aws-elasticloadbalancingV2:albDualstackWithoutPublicIpv4SecurityGroupRulesDefault": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the default security group ingress rules will allow IPv6 ingress from anywhere"
+          },
+          "@aws-cdk/aws-iam:oidcRejectUnauthorizedConnections": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the default behaviour of OIDC provider will reject unauthorized connections"
+          },
+          "@aws-cdk/core:enableAdditionalMetadataCollection": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, CDK will expand the scope of usage data collected to better inform CDK development and improve communication for security concerns and emerging issues."
+          },
+          "@aws-cdk/aws-lambda:createNewPoliciesWithAddToRolePolicy": {
+            "userValue": false,
+            "recommendedValue": false,
+            "explanation": "[Deprecated] When enabled, Lambda will create new inline policies with AddToRolePolicy instead of adding to the Default Policy Statement"
+          },
+          "@aws-cdk/aws-s3:setUniqueReplicationRoleName": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, CDK will automatically generate a unique role name that is used for s3 object replication."
+          },
+          "@aws-cdk/pipelines:reduceStageRoleTrustScope": {
+            "recommendedValue": true,
+            "explanation": "Remove the root account principal from Stage addActions trust policy",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-events:requireEventBusPolicySid": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, grantPutEventsTo() will use resource policies with Statement IDs for service principals."
+          },
+          "@aws-cdk/core:aspectPrioritiesMutating": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When set to true, Aspects added by the construct library on your behalf will be given a priority of MUTATING."
+          },
+          "@aws-cdk/aws-dynamodb:retainTableReplica": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, table replica will be default to the removal policy of source table unless specified otherwise."
+          },
+          "@aws-cdk/cognito:logUserPoolClientSecretValue": {
+            "recommendedValue": false,
+            "explanation": "When disabled, the value of the user pool client secret will not be logged in the custom resource lambda function logs."
+          },
+          "@aws-cdk/pipelines:reduceCrossAccountActionRoleTrustScope": {
+            "recommendedValue": true,
+            "explanation": "When enabled, scopes down the trust policy for the cross-account action role",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-stepfunctions:useDistributedMapResultWriterV2": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the resultWriterV2 property of DistributedMap will be used insted of resultWriter"
+          },
+          "@aws-cdk/s3-notifications:addS3TrustKeyPolicyForSnsSubscriptions": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "Add an S3 trust policy to a KMS key resource policy for SNS subscriptions."
+          },
+          "@aws-cdk/aws-ec2:requirePrivateSubnetsForEgressOnlyInternetGateway": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, the EgressOnlyGateway resource is only created if private subnets are defined in the dual-stack VPC."
+          },
+          "@aws-cdk/aws-ec2-alpha:useResourceIdForVpcV2Migration": {
+            "recommendedValue": false,
+            "explanation": "When enabled, use resource IDs for VPC V2 migration"
+          },
+          "@aws-cdk/aws-s3:publicAccessBlockedByDefault": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, setting any combination of options for BlockPublicAccess will automatically set true for any options not defined."
+          },
+          "@aws-cdk/aws-lambda:useCdkManagedLogGroup": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, CDK creates and manages loggroup for the lambda function"
+          },
+          "@aws-cdk/aws-elasticloadbalancingv2:networkLoadBalancerWithSecurityGroupByDefault": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, Network Load Balancer will be created with a security group by default."
+          },
+          "@aws-cdk/aws-stepfunctions-tasks:httpInvokeDynamicJsonPathEndpoint": {
+            "recommendedValue": true,
+            "explanation": "When enabled, allows using a dynamic apiEndpoint with JSONPath format in HttpInvoke tasks.",
+            "unconfiguredBehavesLike": {
+              "v2": true
+            }
+          },
+          "@aws-cdk/aws-ecs-patterns:uniqueTargetGroupId": {
+            "userValue": true,
+            "recommendedValue": true,
+            "explanation": "When enabled, ECS patterns will generate unique target group IDs to prevent conflicts during load balancer replacement"
+          },
+          "@aws-cdk/aws-route53-patterns:useDistribution": {
+            "recommendedValue": true,
+            "explanation": "Use the `Distribution` resource instead of `CloudFrontWebDistribution`"
+          }
+        }
+      }
+    }
+  },
+  "minimumCliVersion": "2.1033.0"
+}

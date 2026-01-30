@@ -1,0 +1,5 @@
+import { Construct } from 'constructs';
+export declare class DeploymentService extends Construct {
+    constructor(scope: Construct, id: string);
+}
+export * from '../deployment-service';
