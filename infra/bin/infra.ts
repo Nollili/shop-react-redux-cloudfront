@@ -2,7 +2,6 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { DeployWebAppStack } from '../lib/deploy-web-app-stack/deploy-web-app-stack';
-import { HelloS3Stack } from '../lib/hello-s3/hello-s3-stack';
 import { ProductServiceStack } from '../lib/product-service-stack/index';
 import { DatabaseStack } from '../lib/database-stack/index';
 // Import the new ImportServiceStack for handling file imports
@@ -25,7 +24,6 @@ new DeployWebAppStack(app, 'DeployWebAppStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
-new HelloS3Stack(app, 'HelloS3Stack', {});
 new ProductServiceStack(app, 'ProductServiceStack');
 new DatabaseStack(app, 'DatabaseStack');
 // Deploy the ImportServiceStack to create S3 bucket, Lambda function, and API Gateway
