@@ -4,6 +4,7 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3n from 'aws-cdk-lib/aws-s3-notifications';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 /**
  * ImportServiceStack - Manages CSV file import functionality
@@ -23,6 +24,13 @@ import * as s3n from 'aws-cdk-lib/aws-s3-notifications';
 export class ImportServiceStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
+
+    // Import the SQS queue from ProductServiceStack for sending CSV records
+    // This queue will receive product data for batch processing
+    const catalogItemsQueue = sqs.Queue.fromQueueAttributes(this, 'CatalogItemsQueue', {
+      queueArn: 'arn:aws:sqs:eu-central-1:811890958170:catalogItemsQueue',
+      queueUrl: 'https://sqs.eu-central-1.amazonaws.com/811890958170/catalogItemsQueue',
+    });
 
     // Create S3 bucket for file imports - this will store uploaded CSV files
     const importBucket = new s3.Bucket(this, 'ImportBucket', {
@@ -66,8 +74,10 @@ export class ImportServiceStack extends Stack {
       environment: {
         // Pass bucket name for reference (though it's also in the S3 event)
         BUCKET_NAME: importBucket.bucketName,
+        // Pass SQS queue URL for sending CSV records
+        SQS_QUEUE_URL: catalogItemsQueue.queueUrl,
       },
-      // Increase timeout for processing large CSV files
+      // Increase timeout for processing large CSV files and sending to SQS
       timeout: Duration.minutes(5),
     });
 
@@ -90,6 +100,10 @@ export class ImportServiceStack extends Stack {
     // Grant Lambda function permissions to read uploaded files
     // This allows importFileParser to read and process the uploaded CSV files
     importBucket.grantRead(importFileParserFunction);
+    
+    // Grant Lambda function permissions to send messages to SQS queue
+    // This allows importFileParser to send CSV records for batch processing
+    catalogItemsQueue.grantSendMessages(importFileParserFunction);
 
     // Create API Gateway to expose the Lambda function via HTTP
     const api = new apigateway.RestApi(this, 'ImportServiceApi', {

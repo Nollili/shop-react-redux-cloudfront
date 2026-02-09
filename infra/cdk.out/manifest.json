@@ -434,7 +434,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/5398dd5d95db7921e01360199473cc5ea7a669f3f8b189a082cfd2c15be310d5.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ce18608937e609181dd3adcb81f6016863b0d0c9b9dad78ac0e5aaf3744efad4.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -491,7 +491,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:29:33)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:38:33)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:27:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -650,7 +650,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:41:35)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:50:35)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:27:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -857,7 +857,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:53:40)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:62:40)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:27:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -1064,7 +1064,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:65:35)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:74:35)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:27:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -1228,6 +1228,315 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "GetProductsByIdLambdaLogGroup504EEE03"
+          }
+        ],
+        "/ProductServiceStack/CreateProductTopic": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "topicName": "*",
+              "displayName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductTopic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductTopicE4CD9217"
+          }
+        ],
+        "/ProductServiceStack/CreateProductTopic/noemi.verebelyi@gmail.com": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "topic": "*",
+              "endpoint": "*",
+              "protocol": "email",
+              "filterPolicy": "*",
+              "filterPolicyWithMessageBody": "*",
+              "deadLetterQueue": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CreateProductTopic/noemi.verebelyi@gmail.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateProductTopicnoemiverebelyigmailcomC7A2B890"
+          }
+        ],
+        "/ProductServiceStack/CatalogItemsDeadLetterQueue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "queueName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogItemsDeadLetterQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogItemsDeadLetterQueue0CFFA360"
+          }
+        ],
+        "/ProductServiceStack/CatalogItemsQueue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "queueName": "*",
+              "retentionPeriod": "*",
+              "visibilityTimeout": "*",
+              "deadLetterQueue": {
+                "maxReceiveCount": "*",
+                "queue": "*"
+              }
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogItemsQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogItemsQueueB3B6CE23"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "functionName": "*",
+              "runtime": "*",
+              "handler": "*",
+              "code": "*",
+              "environment": "*",
+              "timeout": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/ServiceRole": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Failed to add construct metadata for node [ServiceRole]. Reason: ValidationError: The result of fromAwsManagedPolicyName can not be used in this API [ack: @aws-cdk/core:addConstructMetadataFailed]",
+            "trace": [
+              "Annotations.addMessage (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "addConstructMetadata (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/metadata-resource.js:1:1490)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-iam/lib/role.js:1:12084)",
+              "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
+              "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ProductServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/product-service-stack/index.ts:113:39)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:27:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
+              "loadTS (node:internal/modules/cjs/loader:1826:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "phase4 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1734:14)",
+              "Object..js (node:internal/modules/cjs/loader:1899:10)",
+              "Module.load (node:internal/modules/cjs/loader:1469:32)",
+              "Function._load (node:internal/modules/cjs/loader:1286:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:151:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogBatchProcessLambdaServiceRoleBBA2CA2C"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogBatchProcessLambdaServiceRoleDefaultPolicy81F37948"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogBatchProcessLambda0FC6EE74"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogBatchProcessLambdaLogGroup377F86D4"
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/SqsEventSource:ProductServiceStackCatalogItemsQueue9C0AFB6C": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "target": "*",
+              "batchSize": "*",
+              "maxBatchingWindow": "*",
+              "maxConcurrency": "*",
+              "reportBatchItemFailures": "*",
+              "enabled": "*",
+              "eventSourceArn": "*",
+              "filters": "*",
+              "filterEncryption": "*",
+              "metricsConfig": "*"
+            }
+          }
+        ],
+        "/ProductServiceStack/CatalogBatchProcessLambda/SqsEventSource:ProductServiceStackCatalogItemsQueue9C0AFB6C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogBatchProcessLambdaSqsEventSourceProductServiceStackCatalogItemsQueue9C0AFB6CD297109C"
           }
         ],
         "/ProductServiceStack/ProductServiceApi": [
@@ -1797,6 +2106,18 @@
             "data": "ProductServiceApiproductsPOST9CA2279A"
           }
         ],
+        "/ProductServiceStack/CatalogItemsQueueUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogItemsQueueUrl"
+          }
+        ],
+        "/ProductServiceStack/CatalogItemsQueueArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CatalogItemsQueueArn"
+          }
+        ],
         "/ProductServiceStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -1977,7 +2298,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a3adf4f762ec8b15a81c6e13fcff5f8db796de99c88cc15aaec3175f8039c87f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d366f7197d80c92aa3c603a994e99443753b1efb27d677780ee74876022e9478.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2085,7 +2406,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:46:40)",
+              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:54:40)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:30:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -2239,6 +2560,15 @@
                 "*"
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
           }
         ],
         "/ImportServiceStack/ImportFileParserFunction/ServiceRole": [
@@ -2253,7 +2583,7 @@
               "new Role2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:14132)",
               "new Function2 (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
-              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:60:38)",
+              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:68:38)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:30:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",
@@ -2301,6 +2631,14 @@
                 "*"
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
           }
         ],
         "/ImportServiceStack/ImportFileParserFunction/ServiceRole/ImportServiceRole": [
@@ -2333,6 +2671,14 @@
             "data": {
               "attachToRole": [
                 "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
               ]
             }
           },
@@ -2396,7 +2742,7 @@
               "/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-s3/lib/bucket.js:1:11180",
               "WrappedClass.withNotifications (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-s3/lib/bucket.js:1:11487)",
               "WrappedClass.addEventNotification (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/aws-cdk-lib/aws-s3/lib/bucket.js:1:11133)",
-              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:76:18)",
+              "new ImportServiceStack (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/lib/import-service-stack/index.ts:86:18)",
               "Object.<anonymous> (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/bin/infra.ts:30:1)",
               "Module._compile (node:internal/modules/cjs/loader:1734:14)",
               "Module.m._compile (/Users/Noemi_Verebelyi/Desktop/shop-react-redux-cloudfront/infra/node_modules/ts-node/src/index.ts:1618:23)",

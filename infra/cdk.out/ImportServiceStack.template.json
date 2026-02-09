@@ -208,7 +208,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076.zip"
+     "S3Key": "40e34d818236d069d4b6534bbcc201fcb19f2099d25d1ae088ca871c982b17fe.zip"
     },
     "Environment": {
      "Variables": {
@@ -233,7 +233,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/ImportProductsFileFunction/Resource",
-    "aws:asset:path": "asset.2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076",
+    "aws:asset:path": "asset.40e34d818236d069d4b6534bbcc201fcb19f2099d25d1ae088ca871c982b17fe",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -328,6 +328,15 @@
          ]
         }
        ]
+      },
+      {
+       "Action": [
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl",
+        "sqs:SendMessage"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:sqs:eu-central-1:811890958170:catalogItemsQueue"
       }
      ],
      "Version": "2012-10-17"
@@ -350,13 +359,14 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076.zip"
+     "S3Key": "40e34d818236d069d4b6534bbcc201fcb19f2099d25d1ae088ca871c982b17fe.zip"
     },
     "Environment": {
      "Variables": {
       "BUCKET_NAME": {
        "Ref": "ImportBucketBAF3A8E9"
-      }
+      },
+      "SQS_QUEUE_URL": "https://sqs.eu-central-1.amazonaws.com/811890958170/catalogItemsQueue"
      }
     },
     "FunctionName": "importFileParser",
@@ -376,7 +386,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/ImportFileParserFunction/Resource",
-    "aws:asset:path": "asset.2d0d559071609c003dc7a0da93a3d2174f690572bc5ad6f8254cce4778bc2076",
+    "aws:asset:path": "asset.40e34d818236d069d4b6534bbcc201fcb19f2099d25d1ae088ca871c982b17fe",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -775,7 +785,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1WS1PbMBD+LfWREW4hN27hUcq0NJmQnjIZRrE2jogiuXpAU4//e1eS5RjCMO0UeurFlr9d7ePb1crH+fFgkH94Rx/MYcHWh4Iv8vrG0mJNELqtzSCvT12xBjurs0VYfKUbyE6yg4xklVsIXkyAsmFRgDHZyZIKAyRbCFWsx0GaJGFDoTQu0RQVQj0Auwa7UsxD2eXFFBXG38JzdDPN5iRpjTQvuUw2WvATegWdwA39MSxjWM28IeiAsTN0NnEC3twhCchBNm/m5GwpI18kvk6pgRlGJOhmwWheo3wMesON4UqSj04WFhcY4LJd9ujVTlrefa2oZAJ0xyRLApD3XCu5AWnbeEL6F3141oVIXtMVyfwu5X7HceAmJdwQTjd5PVECZmHTVI01lwWvqBgrbJutr1pbSov9uLqSgkvoZCmXl4Uv230rr8a4DbBTxOqsSvbxHCjX0RZ1fPrDwEfk782iCtx7byTioSppw1R5yZ6dfZgxnAwWfGHNIxr34Vez/1qGAgMx+YaYwS0WAKzJh/5FhCpNXn9R5aVWrsKGFO2yOyHe7D4YjKZtDaEVL9HtA91iZ4Oxw4qjLR1XvcPGwBSaV13dPbKkTlg/scYaloKXKzsKCsY3UZhAzwylbprtoP6Uatq6xwDIOVRCbT0pGNV+DBh9GgZgKZc7ddM/3VOFCfOCiiv25Cj9LR6C3XklWMMSQqgJ6rEehARTU04XEKasLz+JlETagyiNNGurKGsBLi2UmvYIUD3CHWpq/tPPwP7XVdqdoLB/uq26mwBZ/AzbCXx3XAPrLsTn9fEaCSFhGhV6hng3GuxdZ852U1e34jHV2ES2K+88DYzrR1b+1Aj5T9a/I0tjsngenxqOTR3NdF2NkVVU7+7aitoVbuwfg6SKyfW+dhba2zfcwCQMO39wuCy9+sjZytmGSEw8vzPv748H+dER/g3eGc4P21+CfBLfvwClRmtWKgoAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1WS3PTMBD+LfjIqIY2t97SUkoHSkMaTplMR7E2jhpFcvVoCR7/d1aS5bhN6cBAYZjhYsvfrnZX3z7kg/xgMMhfv6B3Zq9gqz3B53l9aWmxIghd1ebG5J8cODiiBqYzYgZ5feSKFdhpnc3D4iNdQ3aYvcxIVrm54MUYKBsWBRiTHS6oMECyuVDFahSkSRI2FErjEk1RIdQdsHOwS8U8lJ2eTFBh9Dk8Ly4n2YwkrQvNSy6TjRZ8h15BJ3BNvwzLGFYzawg6YOwYnY2dgGd3SALyMps1M3K8kJEvEl+Rx4YIup4zmtcoH4Fec2O4kuStk4XFBQa4aJc9erWTlndfSyqZAN0xyZIA5C3XSq5B2jaecPyTPjztQiS/0xXJ/C7lftDx94WBuMRGQzhd5/VYCZiGTRM10lwWvKJipLCmNj6lbZ4tFu/yTAouoZN1/p4UPm3373g1xq2BHSFUZ1XSwhZSrmM86nhyhoGtSP2zxRwy472RiIecpQ0T5SU7dnZhxnDIWPBpN/dI3oX/FfuBmMhJg3PyCvMC1uRD/yJClSavP6jyVCtXYRWLdtn1nDe7CwajaVtDaMVLdHtHN9gOYOyw4mhLx1WvfRmYQvOqKwePLKgT1s/AkYaF4OXSXgQF42srzLRHxlw3H7dQf+41bTnEAMgbqITaeFIwqt0YMPo0XsBSLrfqpj8vJgoPzAsqztiD/vtVPAS79UowhyWEUBPUYz0ICR5NOV3E+8+nn0RKIu1BlIaktVWUtQCXFkpNewSoHuEONTX/6qdq/+ss7U5Q2D/ZVN3dgiy+h80YbhzXwLor9nF9vJhCSHiMCj1DvG0N1q4zx9s5rlvxiGosItuld5bmyPk9Kz9rhPwn68+RpfGw2I8PDceijma6qsbIKqq3t3dF7RI39tsgqeLhel9bC+2VHa5tEoadbxwuS69+4WzlbEMkHjy/Nq9uDwb5/j7+b14bzvfan4x8HN/fAOCZegqMCgAA"
    },
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/CDKMetadata/Default"
