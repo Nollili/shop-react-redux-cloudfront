@@ -645,17 +645,17 @@
     "aws:cdk:path": "ProductServiceStack/CreateProductTopic/Resource"
    }
   },
-  "CreateProductTopicnoemiverebelyigmailcomC7A2B890": {
+  "CreateProductTopicnoemililigmailcom6E81BC17": {
    "Type": "AWS::SNS::Subscription",
    "Properties": {
-    "Endpoint": "noemi.verebelyi@gmail.com",
+    "Endpoint": "noemilili@gmail.com",
     "Protocol": "email",
     "TopicArn": {
      "Ref": "CreateProductTopicE4CD9217"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "ProductServiceStack/CreateProductTopic/noemi.verebelyi@gmail.com/Resource"
+    "aws:cdk:path": "ProductServiceStack/CreateProductTopic/noemilili@gmail.com/Resource"
    }
   },
   "CatalogItemsDeadLetterQueue0CFFA360": {

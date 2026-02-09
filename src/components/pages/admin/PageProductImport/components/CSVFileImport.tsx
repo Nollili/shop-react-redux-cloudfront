@@ -31,6 +31,15 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     setUploading(true);
 
     try {
+      // Get authorization token from localStorage
+      const authorizationToken = localStorage.getItem('authorization_token');
+      
+      if (!authorizationToken) {
+        alert('Authorization token not found. Please set it in localStorage.');
+        setUploading(false);
+        return;
+      }
+
       // Step 1: Get the presigned URL from our import API
       // This calls GET /import?name=filename.csv to get a signed URL
       const response = await axios({
@@ -38,6 +47,9 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
         url,
         params: {
           name: encodeURIComponent(file.name),
+        },
+        headers: {
+          Authorization: `Basic ${authorizationToken}`,
         },
       });
       

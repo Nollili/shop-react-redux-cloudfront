@@ -25,6 +25,14 @@ export class ImportServiceStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
+    // Import basicAuthorizer Lambda from AuthorizationServiceStack
+    const basicAuthorizerArn = 'arn:aws:lambda:eu-central-1:811890958170:function:basicAuthorizer';
+    const basicAuthorizerFunction = lambda.Function.fromFunctionArn(
+      this,
+      'BasicAuthorizer',
+      basicAuthorizerArn
+    );
+
     // Import the SQS queue from ProductServiceStack for sending CSV records
     // This queue will receive product data for batch processing
     const catalogItemsQueue = sqs.Queue.fromQueueAttributes(this, 'CatalogItemsQueue', {
@@ -117,12 +125,19 @@ export class ImportServiceStack extends Stack {
       },
     });
 
+    // Create Lambda authorizer for API Gateway
+    const authorizer = new apigateway.TokenAuthorizer(this, 'ImportAuthorizer', {
+      handler: basicAuthorizerFunction,
+      identitySource: 'method.request.header.Authorization',
+    });
+
     // Create /import resource path in API Gateway
     const importResource = api.root.addResource('import');
     
     // Add GET method to /import that triggers the Lambda function
     // This endpoint will accept fileName as query parameter and return signed URL
     importResource.addMethod('GET', new apigateway.LambdaIntegration(importProductsFileFunction), {
+      authorizer: authorizer,
       // Add request validation to ensure fileName query parameter is provided
       requestParameters: {
         'method.request.querystring.name': true,

@@ -511,7 +511,7 @@
     "aws:cdk:path": "ImportServiceStack/ImportServiceApi/Resource"
    }
   },
-  "ImportServiceApiDeployment3C31EF8Cfef226bfeaeb59909c801cfcc723abb8": {
+  "ImportServiceApiDeployment3C31EF8C481d506a8f5d41a9f95e022697c3339b": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "Description": "API for importing product files",
@@ -520,6 +520,7 @@
     }
    },
    "DependsOn": [
+    "ImportAuthorizerD07D393F",
     "ImportServiceApiimportGET6BDAA231",
     "ImportServiceApiimportOPTIONS0D107BC8",
     "ImportServiceApiimport7D50D4D2",
@@ -534,7 +535,7 @@
    "Type": "AWS::ApiGateway::Stage",
    "Properties": {
     "DeploymentId": {
-     "Ref": "ImportServiceApiDeployment3C31EF8Cfef226bfeaeb59909c801cfcc723abb8"
+     "Ref": "ImportServiceApiDeployment3C31EF8C481d506a8f5d41a9f95e022697c3339b"
     },
     "RestApiId": {
      "Ref": "ImportServiceApi8F88CB06"
@@ -739,7 +740,10 @@
   "ImportServiceApiimportGET6BDAA231": {
    "Type": "AWS::ApiGateway::Method",
    "Properties": {
-    "AuthorizationType": "NONE",
+    "AuthorizationType": "CUSTOM",
+    "AuthorizerId": {
+     "Ref": "ImportAuthorizerD07D393F"
+    },
     "HttpMethod": "GET",
     "Integration": {
      "IntegrationHttpMethod": "POST",
@@ -782,10 +786,26 @@
     "aws:cdk:path": "ImportServiceStack/ImportServiceApi/Default/import/GET/Resource"
    }
   },
+  "ImportAuthorizerD07D393F": {
+   "Type": "AWS::ApiGateway::Authorizer",
+   "Properties": {
+    "AuthorizerResultTtlInSeconds": 300,
+    "AuthorizerUri": "arn:aws:apigateway:eu-central-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-central-1:811890958170:function:basicAuthorizer/invocations",
+    "IdentitySource": "method.request.header.Authorization",
+    "Name": "ImportServiceStackImportAuthorizer9E9A58A0",
+    "RestApiId": {
+     "Ref": "ImportServiceApi8F88CB06"
+    },
+    "Type": "TOKEN"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ImportServiceStack/ImportAuthorizer/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1WS3PTMBD+LfjIqIY2t97SUkoHSkMaTplMR7E2jhpFcvVoCR7/d1aS5bhN6cBAYZjhYsvfrnZX3z7kg/xgMMhfv6B3Zq9gqz3B53l9aWmxIghd1ebG5J8cODiiBqYzYgZ5feSKFdhpnc3D4iNdQ3aYvcxIVrm54MUYKBsWBRiTHS6oMECyuVDFahSkSRI2FErjEk1RIdQdsHOwS8U8lJ2eTFBh9Dk8Ly4n2YwkrQvNSy6TjRZ8h15BJ3BNvwzLGFYzawg6YOwYnY2dgGd3SALyMps1M3K8kJEvEl+Rx4YIup4zmtcoH4Fec2O4kuStk4XFBQa4aJc9erWTlndfSyqZAN0xyZIA5C3XSq5B2jaecPyTPjztQiS/0xXJ/C7lftDx94WBuMRGQzhd5/VYCZiGTRM10lwWvKJipLCmNj6lbZ4tFu/yTAouoZN1/p4UPm3373g1xq2BHSFUZ1XSwhZSrmM86nhyhoGtSP2zxRwy472RiIecpQ0T5SU7dnZhxnDIWPBpN/dI3oX/FfuBmMhJg3PyCvMC1uRD/yJClSavP6jyVCtXYRWLdtn1nDe7CwajaVtDaMVLdHtHN9gOYOyw4mhLx1WvfRmYQvOqKwePLKgT1s/AkYaF4OXSXgQF42srzLRHxlw3H7dQf+41bTnEAMgbqITaeFIwqt0YMPo0XsBSLrfqpj8vJgoPzAsqztiD/vtVPAS79UowhyWEUBPUYz0ICR5NOV3E+8+nn0RKIu1BlIaktVWUtQCXFkpNewSoHuEONTX/6qdq/+ss7U5Q2D/ZVN3dgiy+h80YbhzXwLor9nF9vJhCSHiMCj1DvG0N1q4zx9s5rlvxiGosItuld5bmyPk9Kz9rhPwn68+RpfGw2I8PDceijma6qsbIKqq3t3dF7RI39tsgqeLhel9bC+2VHa5tEoadbxwuS69+4WzlbEMkHjy/Nq9uDwb5/j7+b14bzvfan4x8HN/fAOCZegqMCgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1WS08bMRD+Ld0jMttCbtwCpRS1NGlIT1GEnPVkY+LYix/QdJX/3rG93mwIRa1UhCr1kni/Gc+Mv3nYx/lxr5e/e0MfzGHBloeCz/L62tJiSRC6qQVdzRjN6w9OFpYreUoNTKbkbC6HoFfcGMRIEk7qbN4sv9AVZCfZQUYy7aTl7deCSiZAN1+FYkkA8p5rJVcgbUA2pM4oY+ddeBI0D7KpF/49VyTzu5T7Tce/FgZiEhsbYu5M/tWBg4Y108vrU1cswSJTs7DoBF+5meDFCCjrFwUYk53MqTBAsplQxXIYpEnSnEjjEk1RIdQDsCuwC8U8lF2cj1Fh+C38Dq7H2ZQkrYHmJZfJRgN+RK+gE7ii3/tlDGuTTnyGzkZOwIs7JLtsRr5I/Is8bginq7weKQGTENtYDTWXBa+oGCpkae2DbCK3WMuLSym4hFbWJvJZ4fN2X8erMW4F7BShOquSFhaFcm0pRx1PTj+UYWT1xWIOSfLeSMRDM6QNY+Ule3b2YcZw5ljw/WR2SN6H/xX7cUgGTnAS9G4wL2BN3vd/RKjS5PVnVV5o5SqsYtEs23ngze6DwWjatiG04iW6faBrbAcwtl9xtKXjqjNaGJhC86otB4/MqRPWd/VQw1zwcmEHQcH42gpd+kTjth2/hbqdvGnKIQZA3kMl1NqTglHtx4DRp7kNlnK5VTfdQTxWeGBeUHHJHvXfS+HhENtoCOa2hHCEBHWyEYQEj6ycLuKk92VBIlUxHUGUbiVrqyhrAC4tlJp2iFGdRDjU1PyHv8a6X5dpd4LC/vG6aqcosvsJ1iO4c1wDay+Tp/VxBIeQ8BgVeoZ4rxisaWfOthenbsRDqrG4bJv2aZovVztW/tQI+U/W65DVuLpz2LiPPcUqj3bbMsdQK6q376eK2gVu7PZFUiVjtQTZb73F7kCFLYSEdDe0TpqXQHgNkDA4fbNxWXr1gbOVsxsikaz81ry9P+7lR0f4lL01nB82L8F8FP9/ArACrirnCgAA"
    },
    "Metadata": {
     "aws:cdk:path": "ImportServiceStack/CDKMetadata/Default"

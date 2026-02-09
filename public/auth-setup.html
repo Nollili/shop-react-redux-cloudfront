@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization Setup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #45a049; }
+        .info {
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Authorization Setup</h1>
+        
+        <div class="info">
+            <strong>Current Token:</strong> <span id="currentToken">Not set</span>
+        </div>
+
+        <h2>Quick Setup</h2>
+        <button onclick="setToken()">Set Authorization Token</button>
+        <button onclick="checkToken()">Check Token</button>
+        <button onclick="clearToken()">Clear Token</button>
+
+        <h2>Manual Setup</h2>
+        <p>Username: <code>Noemi_Verebelyi</code></p>
+        <p>Password: <code>TEST_PASSWORD</code></p>
+        <p>Token: <code>Tm9lbWlfVmVyZWJlbHlpOlRFU1RfUEFTU1dPUkQ=</code></p>
+
+        <h2>Test Authorization</h2>
+        <button onclick="testAuth()">Test Import API</button>
+        <div id="result"></div>
+
+        <h2>Console Commands</h2>
+        <pre><code>// Set token
+localStorage.setItem('authorization_token', 'Tm9lbWlfVmVyZWJlbHlpOlRFU1RfUEFTU1dPUkQ=');
+
+// Check token
+localStorage.getItem('authorization_token');
+
+// Clear token
+localStorage.removeItem('authorization_token');</code></pre>
+    </div>
+
+    <script>
+        const API_URL = 'https://hne7yz4mw5.execute-api.eu-central-1.amazonaws.com/prod/import';
+        const TOKEN = 'Tm9lbWlfVmVyZWJlbHlpOlRFU1RfUEFTU1dPUkQ=';
+
+        function setToken() {
+            localStorage.setItem('authorization_token', TOKEN);
+            checkToken();
+            showResult('✅ Token set successfully!', 'success');
+        }
+
+        function checkToken() {
+            const token = localStorage.getItem('authorization_token');
+            document.getElementById('currentToken').textContent = token || 'Not set';
+            if (token) {
+                showResult(`Token found: ${token}`, 'success');
+            } else {
+                showResult('No token found', 'info');
+            }
+        }
+
+        function clearToken() {
+            localStorage.removeItem('authorization_token');
+            checkToken();
+            showResult('Token cleared', 'info');
+        }
+
+        async function testAuth() {
+            const token = localStorage.getItem('authorization_token');
+            if (!token) {
+                showResult('❌ No token found. Please set the token first.', 'info');
+                return;
+            }
+
+            showResult('Testing authorization...', 'info');
+
+            try {
+                const response = await fetch(`${API_URL}?name=test.csv`, {
+                    headers: {
+                        'Authorization': `Basic ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    showResult(`✅ Authorization successful! Got signed URL.`, 'success');
+                } else {
+                    showResult(`❌ Authorization failed: ${response.status} ${response.statusText}`, 'info');
+                }
+            } catch (error) {
+                showResult(`❌ Error: ${error.message}`, 'info');
+            }
+        }
+
+        function showResult(message, type = 'info') {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = type;
+            resultDiv.textContent = message;
+        }
+
+        // Check token on page load
+        checkToken();
+    </script>
+</body>
+</html>

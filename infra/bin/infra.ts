@@ -4,8 +4,8 @@ import * as cdk from 'aws-cdk-lib';
 import { DeployWebAppStack } from '../lib/deploy-web-app-stack/deploy-web-app-stack';
 import { ProductServiceStack } from '../lib/product-service-stack/index';
 import { DatabaseStack } from '../lib/database-stack/index';
-// Import the new ImportServiceStack for handling file imports
 import { ImportServiceStack } from '../lib/import-service-stack/index';
+import { AuthorizationServiceStack } from '../lib/authorization-service-stack/index';
 
 const app = new cdk.App();
 new DeployWebAppStack(app, 'DeployWebAppStack', {
@@ -26,5 +26,5 @@ new DeployWebAppStack(app, 'DeployWebAppStack', {
 
 new ProductServiceStack(app, 'ProductServiceStack');
 new DatabaseStack(app, 'DatabaseStack');
-// Deploy the ImportServiceStack to create S3 bucket, Lambda function, and API Gateway
 new ImportServiceStack(app, 'ImportServiceStack');
+new AuthorizationServiceStack(app, 'AuthorizationServiceStack');
