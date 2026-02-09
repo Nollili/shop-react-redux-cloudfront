@@ -6,6 +6,7 @@ import { ProductServiceStack } from '../lib/product-service-stack/index';
 import { DatabaseStack } from '../lib/database-stack/index';
 import { ImportServiceStack } from '../lib/import-service-stack/index';
 import { AuthorizationServiceStack } from '../lib/authorization-service-stack/index';
+import { CartServiceStack } from '../lib/cart-service-stack/index';
 
 const app = new cdk.App();
 new DeployWebAppStack(app, 'DeployWebAppStack', {
@@ -28,3 +29,4 @@ new ProductServiceStack(app, 'ProductServiceStack');
 new DatabaseStack(app, 'DatabaseStack');
 new ImportServiceStack(app, 'ImportServiceStack');
 new AuthorizationServiceStack(app, 'AuthorizationServiceStack');
+new CartServiceStack(app, 'CartServiceStack');
