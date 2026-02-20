@@ -1,0 +1,15 @@
+{
+  "name": "import-service-lambdas",
+  "version": "1.0.0",
+  "description": "Lambda functions for CSV file import processing",
+  "main": "importProductsFile.js",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/s3-request-presigner": "^3.0.0",
+    "@aws-sdk/client-sqs": "^3.0.0",
+    "csv-parser": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

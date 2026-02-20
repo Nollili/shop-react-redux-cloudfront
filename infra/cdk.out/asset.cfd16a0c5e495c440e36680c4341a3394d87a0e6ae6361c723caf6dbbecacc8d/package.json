@@ -1,0 +1,16 @@
+{
+  "name": "product-service",
+  "version": "1.0.0",
+  "main": "dist/getProductsList.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jest.config.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sns": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/aws-lambda": "^8.10.119"
+  }
+}

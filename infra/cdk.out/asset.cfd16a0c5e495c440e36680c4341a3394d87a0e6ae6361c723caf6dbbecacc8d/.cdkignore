@@ -1,0 +1,20 @@
+# Exclude test files from CDK asset bundling
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+
+# Exclude TypeScript source files if using compiled JS
+*.ts
+!*.d.ts
+
+# Exclude development files
+*.map
+.DS_Store
+node_modules/
+coverage/
+.nyc_output/
+
+# Exclude documentation
+README.md
+*.md

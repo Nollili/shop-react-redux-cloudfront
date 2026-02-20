@@ -1,0 +1,34 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "a186507633f003d58fa451f98829c7d939ff26901493cf45e8cdfbcd5952ddc3": {
+      "displayName": "CartLambdaFunction/Code",
+      "source": {
+        "path": "asset.a186507633f003d58fa451f98829c7d939ff26901493cf45e8cdfbcd5952ddc3",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-2527de65": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "a186507633f003d58fa451f98829c7d939ff26901493cf45e8cdfbcd5952ddc3.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "84d97b905a1d4ade2030c7ae8ebcadb17976f1e0fbb11ed7e35c49b324345c40": {
+      "displayName": "CartServiceStack Template",
+      "source": {
+        "path": "CartServiceStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-04fb593c": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "84d97b905a1d4ade2030c7ae8ebcadb17976f1e0fbb11ed7e35c49b324345c40.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

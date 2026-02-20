@@ -1,0 +1,1 @@
+{"errorType":"Error","errorMessage":"Unauthorized","trace":["Error: Unauthorized","    at exports.handler (/var/task/basicAuthorizer.js:48:11)","    at Runtime.handleOnceNonStreaming (file:///var/runtime/index.mjs:1306:29)"]}

@@ -1,0 +1,5 @@
+{
+  "type": "TOKEN",
+  "authorizationToken": "Basic Tm9lbWlfVmVyZWJlbHlpOlRFU1RfUEFTU1dPUkQ=",
+  "methodArn": "arn:aws:execute-api:eu-central-1:811890958170:*/GET/import"
+}

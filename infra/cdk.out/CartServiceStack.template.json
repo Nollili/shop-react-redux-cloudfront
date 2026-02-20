@@ -1,0 +1,777 @@
+{
+ "Resources": {
+  "CartLambdaFunctionServiceRole61B46A25": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartLambdaFunction/ServiceRole/Resource"
+   }
+  },
+  "CartLambdaFunction0698A3E9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "a186507633f003d58fa451f98829c7d939ff26901493cf45e8cdfbcd5952ddc3.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "NODE_ENV": "production"
+     }
+    },
+    "FunctionName": "cartService",
+    "Handler": "dist/lambda.handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "CartLambdaFunctionServiceRole61B46A25",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "CartLambdaFunctionServiceRole61B46A25"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartLambdaFunction/Resource",
+    "aws:asset:path": "asset.a186507633f003d58fa451f98829c7d939ff26901493cf45e8cdfbcd5952ddc3",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CartLambdaFunctionLogGroupCF52EAE6": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CartLambdaFunction0698A3E9"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartLambdaFunction/LogGroup/Resource"
+   }
+  },
+  "CartServiceApiFFFACB8C": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "API Gateway for NestJS Cart Service",
+    "Name": "Cart Service"
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Resource"
+   }
+  },
+  "CartServiceApiDeploymentDF1346A3b3c5e73bf8e1b1aafaa7433a933c175d": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "API Gateway for NestJS Cart Service",
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "DependsOn": [
+    "CartServiceApiproxyANY912C3684",
+    "CartServiceApiproxyOPTIONS2376958C",
+    "CartServiceApiproxy125E0DE6",
+    "CartServiceApiANYA3E3AF6E",
+    "CartServiceApiOPTIONSDE3A95A8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "CartServiceApiDeploymentStageprodACB46FEC": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "CartServiceApiDeploymentDF1346A3b3c5e73bf8e1b1aafaa7433a933c175d"
+    },
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    },
+    "StageName": "prod"
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "CartServiceApiOPTIONSDE3A95A8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "CartServiceApiFFFACB8C",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/OPTIONS/Resource"
+   }
+  },
+  "CartServiceApiproxy125E0DE6": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "CartServiceApiFFFACB8C",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "{proxy+}",
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/{proxy+}/Resource"
+   }
+  },
+  "CartServiceApiproxyOPTIONS2376958C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "CartServiceApiproxy125E0DE6"
+    },
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/{proxy+}/OPTIONS/Resource"
+   }
+  },
+  "CartServiceApiproxyANYApiPermissionCartServiceStackCartServiceApi2C208561ANYproxy576538CA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CartLambdaFunction0698A3E9",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "CartServiceApiFFFACB8C"
+       },
+       "/",
+       {
+        "Ref": "CartServiceApiDeploymentStageprodACB46FEC"
+       },
+       "/*/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/{proxy+}/ANY/ApiPermission.CartServiceStackCartServiceApi2C208561.ANY..{proxy+}"
+   }
+  },
+  "CartServiceApiproxyANYApiPermissionTestCartServiceStackCartServiceApi2C208561ANYproxy382DD532": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CartLambdaFunction0698A3E9",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "CartServiceApiFFFACB8C"
+       },
+       "/test-invoke-stage/*/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/{proxy+}/ANY/ApiPermission.Test.CartServiceStackCartServiceApi2C208561.ANY..{proxy+}"
+   }
+  },
+  "CartServiceApiproxyANY912C3684": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "ANY",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CartLambdaFunction0698A3E9",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "CartServiceApiproxy125E0DE6"
+    },
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/{proxy+}/ANY/Resource"
+   }
+  },
+  "CartServiceApiANYA3E3AF6E": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "ANY",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "CartServiceApiFFFACB8C",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "CartServiceApiFFFACB8C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CartServiceApi/Default/ANY/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1VTW/bMAz9LfOxULw1ufXWpvsIti5B2ltgFKzNOGpkydNHM8/wf58kS46zbsCGYQMG7GTy6UkmH0lpmk5ns/TVCzioSV7sJ4w+pO2thnxPLHTfMqgeCkjbN4bnmgq+aZNtMD9ChclFcpaQRBqu6eDloojmDnjBUAbPcYTRwauwErK5pV8iGfkTlYJXyHtKR9oEiuL1GN545lmSdRmZb3kMy9krlBVVynodoVCl7Vow3HiaszqiZvegFGqVXrqP9dMrk+9RX4FyRCZKlbYfRPlWClPbTFkwh0z7n0ZGR6CmJWg8QGP/hkpf1tRuk7010qdAlUtau0gHZAuG6bmQaiVxy2i500tPUMmFTZsxcVhKWlLn+x0eukG9E8UJ9A6hQNlDXR9gCIVcY81E44SzUT2PwUYf64caKD/S1Vj/O2ETpjmwRWH1b7vsj+M+iWM0xPZjiT6FCI2q4ReJTVkYmaMvpesP0kvVl8MvxZbUuu7XAkC5xlLCSBgxKoSxTGl7VJ56i7g7Qn7/XVOHRvHqvsdmjZ8MlWjZW2AKf8R30+BCsmnU9s+onBKJ0qCNmh/HSYblFUjbXHooe9YFLW9OTvnVQ8h/sf6WWGG8fvMEPwD9BrKS4nMTx8CmUoOMgzJcN4tnx4WF/ozlN9ENGoV7t/XgP1JkX6GfEwF4E/PU0uB3Us+Gi9XLaztoUNpfNv5BcTcR5aUjLo2uje4It5Gmj+rl03SWnp/bd/ZRUToJz2W67r9fAZRXri+EBwAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "CartServiceStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "CartServiceApiEndpointF4EA49AD": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CartServiceApiFFFACB8C"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "CartServiceApiDeploymentStageprodACB46FEC"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "CartApiUrl": {
+   "Description": "Cart Service API Gateway URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CartServiceApiFFFACB8C"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "CartServiceApiDeploymentStageprodACB46FEC"
+      },
+      "/"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "CartApiUrl"
+   }
+  },
+  "CartLambdaArn": {
+   "Description": "Cart Service Lambda ARN",
+   "Value": {
+    "Fn::GetAtt": [
+     "CartLambdaFunction0698A3E9",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "CartLambdaArn"
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

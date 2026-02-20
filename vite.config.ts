@@ -13,7 +13,8 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "./infra/resources/build",
+    outDir: "./dist",
+    minify: 'esbuild',
   },
   plugins: [react()],
   test: {
